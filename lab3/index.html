@@ -3,61 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лабораторна робота: HTML5 верстка</title>
+    <title>NEWS WEBSITE — Головна сторінка</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1>Звіт з лабораторної роботи</h1>
-        <p>Виконав: Панченко Валентин</p>
+        <div class="container">
+            <h1>NEWS WEBSITE</h1>
+        </div>
     </header>
 
     <nav>
-        <ul>
-            <li><a href="https://elearn.nubip.edu.ua/mod/assign/view.php?id=474002">Теорія</a></li>
-            <li><a href="https://elearn.nubip.edu.ua/mod/assign/view.php?id=474002">Практична частина</a></li>
-            <li><a href="https://github.com/Valentyn75" target="_blank">Мій GitHub</a></li>
-        </ul>
+        <div class="container">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">World</a></li>
+                <li><a href="#">Politics</a></li>
+                <li><a href="#">Business</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <main>
-        <section id="info">
-            <h2>Загальна інформація</h2>
-            <article id="theory">
-                <h3>Тема проекту</h3>
-                <p>Створення веб-сторінок за допомогою HTML5</p>
-            </article>
-
-            <article>
-                <h3>Мета роботи</h3>
-                <p>
-                    Ознайомитися з підходами та технологіями, що використовуються для розмітки сучасних веб-сторінок, 
-                    та розмітити веб-сторінку за допомогою мови розмітки HTML5. Навчитися створювати різні 
-                    структури веб-сторінок використовуючи HTML5.
-                </p>
-            </article>
-        </section>
-
-        <section id="practice">
-            <h2>Демонстрація верстки</h2>
-            <p>Нижче наведено приклад інтеграції відео, як зазначено в методичних рекомендаціях:</p>
+    <main class="container page-layout">
+        
+        <section class="content-area">
+            <h2 class="visually-hidden">Останні новини</h2>
             
-            <div class="video-wrapper">
-                <iframe 
-                    width="560" 
-                    height="315" 
-                    src="https://www.youtube.com/embed/g30rt4PrcfU" 
-                    title="Способи верстання сторінок"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+            <article class="main-story">
+                <img src="https://picsum.photos/id/122/800/400" alt="Панорама міста">
+                <h2>Main Story Title</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur ad ima-gráuda aliquls ckt quim. Proin elementum sem eget urna tristique, vel efficitur sem varius.</p>
+            </article>
+
+            <div class="category-grid">
+                <article class="category-item">
+                    <img src="https://picsum.photos/id/1016/200/150" alt="Світові новини">
+                    <div class="category-text">
+                        <h3>World</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>
+
+                <article class="category-item">
+                    <img src="https://picsum.photos/id/1011/200/150" alt="Політичні новини">
+                    <div class="category-text">
+                        <h3>Politics</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>
+
+                <article class="category-item">
+                    <img src="https://picsum.photos/id/1018/200/150" alt="Бізнес новини">
+                    <div class="category-text">
+                        <h3>Business</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </article>
             </div>
         </section>
+
+        <aside class="sidebar">
+            <div class="search-block">
+                <div class="search-input">
+                    <input type="text" placeholder="Search...">
+                    <button type="button">🔍</button>
+                </div>
+            </div>
+
+            <section class="popular-news">
+                <h3>Popular News</h3>
+                <ul>
+                    <li><a href="#">Popular News Headline</a></li>
+                    <li><a href="#">Popular News Headline</a></li>
+                    <li><a href="#">Popular News Headline</a></li>
+                </ul>
+            </section>
+
+            <section class="popular-news">
+                <h3>Popular News</h3>
+                <ul>
+                    <li><a href="#">Popular News Headline</a></li>
+                    <li><a href="#">Popular News Headline</a></li>
+                    <li><a href="#">Popular News Headline</a></li>
+                </ul>
+            </section>
+
+            <article class="sidebar-promo">
+                <div class="promo-icon">🎤</div>
+                <h3>Politics</h3>
+                <p>Lorem ipsum dolorsnat amet, consectetur.</p>
+                <a href="#" class="btn-address">Address auvs</a>
+            </article>
+        </aside>
+
     </main>
 
     <footer>
-        <p>&copy; 2026 Всі права захищені | Лабораторна робота HTML5/CSS3</p>
+        <div class="container">
+            <p>&copy; 2024 News Website</p>
+        </div>
     </footer>
 
 </body>
