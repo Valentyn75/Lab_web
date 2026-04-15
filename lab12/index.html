@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather PWA</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2F3BA2">
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;           /* точно як на скріншоті */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        .app {
+            width: 100%;
+            max-width: 380px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        header {
+            background: #2F3BA2;
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        .header-title { font-weight: 600; }
+        .card { padding: 20px 24px; }
+        .location { font-size: 1.35rem; margin: 0 0 4px 0; }
+        .datetime { font-size: 0.95rem; color: #666; margin-bottom: 20px; }
+        .weather-main { display: flex; align-items: center; margin-bottom: 20px; }
+        .weather-icon { font-size: 5.8rem; margin-right: 20px; }   /* трохи більша іконка */
+        .temperature { font-size: 4.8rem; font-weight: 700; line-height: 1; }
+        .condition { font-size: 1.3rem; margin-top: -8px; color: #555; }
+        .details { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 12px 20px; 
+            margin-top: 10px; 
+        }
+        .detail-item { display: flex; justify-content: space-between; }
+        .detail-label { color: #555; }
+        .forecast { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+        .forecast-title { font-size: 1rem; margin-bottom: 12px; color: #555; }
+        .forecast-days { display: flex; justify-content: space-between; }
+        .day { text-align: center; flex: 1; }
+        .day-name { font-size: 0.9rem; margin-bottom: 6px; }
+        .day-icon { font-size: 2.3rem; margin: 4px 0; }
+        .day-temp { font-size: 1.05rem; }
+    </style>
+</head>
+<body>
+
+<div class="app">
+    <header>
+        <div class="header-title">Weather PWA</div>
+        <div>⟳</div>
+    </header>
+
+    <div class="card">
+        <h2 class="location" id="city">New York, NY</h2>
+        <p class="datetime" id="datetime">Fri Jan 22 2016 19:04:41 GMT+0000 (GMT)</p>
+        <p class="condition" id="condition">Clear</p>
+
+        <div class="weather-main">
+            <div class="weather-icon" id="icon">⛅</div>
+            <div>
+                <div class="temperature" id="temp">30°<span style="font-size:2.2rem;">F</span></div>
+            </div>
+        </div>
+
+        <div class="details">
+            <div class="detail-item"><span class="detail-label">Feels like:</span> <span id="feels">21°F</span></div>
+            <div class="detail-item"><span class="detail-label">Precipitation:</span> <span id="precip">80%</span></div>
+            <div class="detail-item"><span class="detail-label">Humidity:</span> <span id="humidity">17%</span></div>
+            <div class="detail-item"><span class="detail-label">Wind:</span> <span id="wind">2 mph 125°</span></div>
+        </div>
+
+        <div class="forecast">
+            <div class="forecast-title">5-DAY FORECAST</div>
+            <div class="forecast-days" id="forecast"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(() => console.log('✅ Service Worker Active'))
+                .catch(err => console.log('SW Error', err));
+        });
+    }
+
+    function loadDemoWeather() {
+        document.getElementById('city').textContent = "New York, NY";
+        document.getElementById('datetime').textContent = "Fri Jan 22 2016 19:04:41 GMT+0000 (GMT)";
+        document.getElementById('condition').textContent = "Clear";
+        document.getElementById('temp').innerHTML = `30°<span style="font-size:2.2rem;">F</span>`;
+        document.getElementById('icon').textContent = "⛅";
+        document.getElementById('feels').textContent = "21°F";
+        document.getElementById('precip').textContent = "80%";
+        document.getElementById('humidity').textContent = "17%";
+        document.getElementById('wind').textContent = "2 mph 125°";
+
+        const forecastHTML = `
+            <div class="day"><div class="day-name">Fri</div><div class="day-icon">☀️</div><div class="day-temp">36° 31°</div></div>
+            <div class="day"><div class="day-name">Sat</div><div class="day-icon">🌧️</div><div class="day-temp">34° 28°</div></div>
+            <div class="day"><div class="day-name">Sun</div><div class="day-icon">❄️</div><div class="day-temp">31° 17°</div></div>
+            <div class="day"><div class="day-name">Mon</div><div class="day-icon">🌦️</div><div class="day-temp">38° 31°</div></div>
+            <div class="day"><div class="day-name">Tue</div><div class="day-icon">🌊</div><div class="day-temp">40° 36°</div></div>
+            <div class="day"><div class="day-name">Wed</div><div class="day-icon">🌬️</div><div class="day-temp">35° 29°</div></div>
+            <div class="day"><div class="day-name">Thu</div><div class="day-icon">⛅</div><div class="day-temp">42° 40°</div></div>
+        `;
+        document.getElementById('forecast').innerHTML = forecastHTML;
+    }
+
+    loadDemoWeather();
+</script>
+</body>
+</html>
