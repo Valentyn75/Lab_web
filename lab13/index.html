@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Node.js</title>
+    <style>
+        body { font-family: system-ui; text-align: center; padding: 50px; background: #f0f2f5; }
+        .card { background: white; max-width: 400px; margin: 0 auto; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .temp { font-size: 4rem; font-weight: bold; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🌤️ Погода від Node.js</h1>
+        <div id="weather"></div>
+    </div>
+
+    <script>
+        fetch('/api/weather')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('weather').innerHTML = `
+                    <h2>${data.city}</h2>
+                    <div class="temp">${data.temp}°C</div>
+                    <p>${data.condition}</p>
+                    <p>Відчувається: ${data.feelsLike}°C</p>
+                    <p>Вологість: ${data.humidity}% | Вітер: ${data.wind} м/с</p>
+                `;
+            })
+            .catch(() => {
+                document.getElementById('weather').innerHTML = `<p style="color:red">Не вдалося отримати дані</p>`;
+            });
+    </script>
+</body>
+</html>
